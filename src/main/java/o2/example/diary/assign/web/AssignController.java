@@ -86,4 +86,15 @@ public class AssignController {
 		return ObjectMapperSupport.objectToJson(result);
 	}
 
+	public boolean checkPhoneNumber( @RequestParam Map<String, Object> param ){
+		int rData = AssignService.chackPhoneNember(param);
+		if (rData == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	//반환형태가 String이 아니라 boolean이 맞는지?
+	//AssignService를 호출하면 DB와 연결해서 count를 해주는 게 맞는지?
+
 }

@@ -86,15 +86,27 @@ public class AssignController {
 		return ObjectMapperSupport.objectToJson(result);
 	}
 
-	public boolean checkPhoneNumber( @RequestParam Map<String, Object> param ){
-		int rData = AssignService.chackPhoneNember(param);
-		if (rData == 1) {
-			return true;
-		} else {
-			return false;
+	@RequestMapping(produces = "application/json; charset=UTF-8" , value = "/checkPhoneNumber" , method = RequestMethod.GET)
+	@ResponseBody
+	public String checkPhoneNumber( HttpServletRequest request, @RequestParam Map<String, Object> param ){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			int rData = AssignService.chackPhoneNember(param);
+
+			if (rData == 1) {
+				result.put("SUCCESS", true);
+				result.put("RESULT", rData);
+				return ObjectMapperSupport.objectToJson(result);
+			} else {
+				result.put("SUCCESS", false);
+				return ObjectMapperSupport.objectToJson(result);
+			}
+		}catch(NullPointerException e){
+			LOGGER.error(e.getMessage());
+			result.put("SUCCESS", false);
+			result.put("MSG", e);
+			return ObjectMapperSupport.objectToJson(result);
 		}
 	}
-	//반환형태가 String이 아니라 boolean이 맞는지?
-	//AssignService를 호출하면 DB와 연결해서 count를 해주는 게 맞는지?
 
 }

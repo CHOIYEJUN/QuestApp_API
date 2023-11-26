@@ -4,7 +4,7 @@
 <mapper namespace="assign">
 
 	<select id="getLoginData" parameterType="Map" resultType="Map">
-		SELECT phone
+		SELECT phone, user_name, belong
 		FROM users
 		WHERE phone = #{phone} AND password = #{password}
 	</select>
@@ -19,5 +19,6 @@
 		FROM users
 		WHERE phone = #{phone}
 	</select>
+
 
 </mapper>

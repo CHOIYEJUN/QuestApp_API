@@ -99,20 +99,23 @@ public class AssignController {
 		try {
 			int rData = AssignService.chackPhoneNember(param);
 
-			if (rData == 1) {
-				result.put("SUCCESS", true);
-				result.put("RESULT", rData);
-				return ObjectMapperSupport.objectToJson(result);
-			} else {
+			if (rData > 0 ) {
 				result.put("SUCCESS", false);
-				return ObjectMapperSupport.objectToJson(result);
+				result.put("MSG", "이미 등록된 전화번호 입니다.");
+			} else {
+				result.put("SUCCESS", true);
+				result.put("MSG", "사용 가능한 전화번호 입니다.");
 			}
 		}catch(NullPointerException e){
 			LOGGER.error(e.getMessage());
 			result.put("SUCCESS", false);
 			result.put("MSG", e);
-			return ObjectMapperSupport.objectToJson(result);
+
 		}
+
+		return ObjectMapperSupport.objectToJson(result);
 	}
+
+
 
 }

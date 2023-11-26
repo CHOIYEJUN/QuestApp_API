@@ -49,8 +49,7 @@ public class AssignController {
 		return ObjectMapperSupport.objectToJson(result);
 	}
 
-	// 유저가 입력한 회원가입 정보로 회원 정보를 인서트 한다.
-	// 유저가 입력한 회원가입 정보로 회원 정보를 인서트 한다.
+
 	@RequestMapping(produces = "application/json; charset=UTF-8" , value = "/insartAssignData" , method = RequestMethod.GET)
 	@ResponseBody
 	public String insartAssignData(HttpServletRequest request,  @RequestParam Map<String, Object> param ) {

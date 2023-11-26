@@ -32,4 +32,8 @@ public class StempService {
     public List<Map<String, Object>> getStempData(Map<String, Object> param) {
         return sqlSession.selectList("stemp.getStempData", param);
     }
+
+    public void deleteStemp(Map<String, Object> param) {
+        sqlSession.delete("stemp.deleteStemp", param);
+    }
 }

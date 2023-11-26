@@ -46,6 +46,11 @@
 		WHERE phone = #{phone} AND quest_date = #{quest_date}
 	</select>
 
+	<delete id="deleteStemp" parameterType="Map">
+		DELETE FROM quest
+		WHERE phone = #{phone} AND quest_date = #{quest_date}
+	</delete>
+
 
 
 

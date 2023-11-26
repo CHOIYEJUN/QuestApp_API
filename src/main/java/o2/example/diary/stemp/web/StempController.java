@@ -88,4 +88,23 @@ public class StempController {
 
         return ObjectMapperSupport.objectToJson(result);
     }
+
+
+    @RequestMapping(produces = "application/json; charset=UTF-8" , value = "/deleteStemp" , method = RequestMethod.GET)
+    @ResponseBody
+    public String deleteStemp(HttpServletRequest request,  @RequestParam Map<String, Object> param ) {
+            Map<String, Object> result = new HashMap<String, Object>();
+
+            try {
+                StempService.deleteStemp(param);
+                result.put("SUCCESS", true);
+                result.put("MSG", "스템프 삭제 성공");
+            }catch (NullPointerException e) {
+                LOGGER.error(e.getMessage());
+                result.put("SUCCESS", false);
+                result.put("MSG", e);
+            }
+
+            return ObjectMapperSupport.objectToJson(result);
+    }
 }

@@ -20,5 +20,9 @@
 		WHERE phone = #{phone}
 	</select>
 
+	<update id="updatePasswordData" parameterType="Map">
+		UPDATE users SET password = #{password} where phone = #{phone}
+	</update>
+
 
 </mapper>

@@ -114,7 +114,25 @@ public class AssignController {
 
 		return ObjectMapperSupport.objectToJson(result);
 	}
+	@RequestMapping(produces = "application/json; charset=UTF-8" , value = "/modifyUserPasswordData" , method = RequestMethod.GET)
+	@ResponseBody
+	public String ModifyUserPassword(HttpServletRequest request,  @RequestParam Map<String, Object> param ) {
+		Map<String, Object> result = new HashMap<String, Object>();
 
+		try {
+			String modifyPassword = (String) param.get("password");
+			String encryptedModifyPassword = SecurityUtils.encryptPassword(modifyPassword); //평문->암호화
+			param.put("password", encryptedModifyPassword);
+
+			AssignService.modifyUserPasswordData(param);
+			result.put("SUCCESS", true);
+		} catch (NoSuchAlgorithmException | NullPointerException e) {
+			LOGGER.error(e.getMessage());
+			result.put("SUCCESS", false);
+			result.put("MSG", e);
+		}
+		return ObjectMapperSupport.objectToJson(result);
+	}
 
 
 }

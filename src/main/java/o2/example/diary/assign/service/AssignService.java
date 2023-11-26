@@ -20,12 +20,16 @@ public class AssignService {
 		return sqlSession.selectList("assign.getLoginData", param);
 	}
 
-	 public void insartAssignData(Map<String, Object> param) {
+	public void insartAssignData(Map<String, Object> param) {
 		sqlSession.insert("assign.insartAssignData", param);
 	}
 
 	public int chackPhoneNember(Map<String, Object> param) {
 		return sqlSession.selectOne("assign.chackPhoneNember", param);
+	}
+
+	public void modifyUserPasswordData(Map<String, Object> param) {
+		sqlSession.update("assign.updatePasswordData", param);
 	}
 
 

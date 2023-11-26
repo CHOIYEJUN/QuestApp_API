@@ -19,6 +19,9 @@ public class MainService {
 	public List<Map<String, Object>> getDiaryData(Map<String, Object> param) {
 		return sqlSession.selectList("book.getDiaryData", param);
 	}
+	public void deleteDiaryById(String id) {
+		sqlSession.delete("book.deleteDiaryById", id);
+	}
 
 
 

@@ -7,12 +7,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import util.ObjectMapperSupport;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 @Controller
 @RequestMapping(value = "")
@@ -40,5 +45,17 @@ public class MainController {
 
 		return ObjectMapperSupport.objectToJson(result);
 	}
+	@DeleteMapping("/{id}")
+	@ResponseBody
+	public ResponseEntity<?> deleteDiary(@PathVariable("id") String id) {
+		try {
+			mainService.deleteDiaryById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			LOGGER.error("Error deleting diary entry", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 
 }
